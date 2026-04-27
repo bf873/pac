@@ -1,0 +1,2857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[YOUR BRAND NAME] - Premium Concert Photography</title>
+    <style>
+        /* ========================================
+           GLOBAL STYLES & RESET
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #1a1a1a;
+            --accent-gold: #d4af37;
+            --accent-neon: #00ff88;
+            --accent-red: #ff006e;
+            --text-light: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --border-color: #333;
+            --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-medium: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            text-transform: uppercase;
+            letter-spacing: -1.5px;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        a:hover {
+            color: var(--accent-neon);
+        }
+
+        /* CTA Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold), #f0c950);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(255, 0, 110, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-gold);
+            color: #000;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        /* Section Padding */
+        section {
+            padding: 5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 0;
+            }
+        }
+
+        /* Scroll Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--transition-medium), transform var(--transition-medium);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity var(--transition-medium), transform var(--transition-medium);
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity var(--transition-medium), transform var(--transition-medium);
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .nav-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-light);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-cta {
+            padding: 10px 25px;
+            background: var(--accent-gold);
+            color: #000;
+            font-weight: 600;
+            border-radius: 2px;
+            transition: all var(--transition-fast);
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.75rem;
+            }
+
+            .nav-logo {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ========================================
+           FLOATING CTA BUTTON
+           ======================================== */
+        .floating-cta {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 10px 40px rgba(255, 0, 110, 0.3);
+            animation: float 3s ease-in-out infinite;
+            transition: all var(--transition-fast);
+        }
+
+        .floating-cta:hover {
+            transform: scale(1.15);
+            box-shadow: 0 15px 50px rgba(255, 0, 110, 0.5);
+        }
+
+        .floating-cta svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-cta {
+                width: 50px;
+                height: 50px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.7)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23150a2e" width="1200" height="800"/><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="%23333" stroke-width="0.5"/></pattern></defs><rect width="1200" height="800" fill="url(%23grid)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000, #1a1a1a);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero h1 {
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            background: linear-gradient(90deg, var(--text-light), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subheading {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+
+        .hero-scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent-gold);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        /* ========================================
+           CREDIBILITY STRIP
+           ======================================== */
+        .credibility-strip {
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), rgba(0, 255, 136, 0.1));
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 0;
+            margin: -4rem 0 0 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .credibility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            align-items: center;
+            text-align: center;
+        }
+
+        .credibility-item h4 {
+            color: var(--accent-gold);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .credibility-item p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        /* ========================================
+           ABOUT SECTION
+           ======================================== */
+        .about {
+            background: var(--secondary-dark);
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.05), transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(255, 0, 110, 0.05), transparent 50%);
+            pointer-events: none;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(255, 0, 110, 0.1));
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-muted);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '📸';
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .about-text h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text h3 {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .mission-statement {
+            margin: 2rem 0;
+            padding: 2rem;
+            border-left: 4px solid var(--accent-gold);
+            background: rgba(212, 175, 55, 0.05);
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* ========================================
+           STYLE SECTION
+           ======================================== */
+        .signature-style {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signature-style h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .style-card {
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 4px;
+            transition: all var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .style-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .style-card:hover::before {
+            left: 100%;
+        }
+
+        .style-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .style-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .style-card h3 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .style-card p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* ========================================
+           SERVICES SECTION
+           ======================================== */
+        .services {
+            background: linear-gradient(180deg, rgba(212, 175, 55, 0.05), rgba(255, 0, 110, 0.05));
+        }
+
+        .services h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--primary-dark);
+            border: 2px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 4px;
+            text-align: center;
+            transition: all var(--transition-medium);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-gold);
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
+        }
+
+        .service-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-gold), #f0c950);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* ========================================
+           VALUE PROPOSITION SECTION
+           ======================================== */
+        .value-props {
+            background: var(--secondary-dark);
+        }
+
+        .value-props h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .value-props-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-prop-item {
+            display: flex;
+            gap: 1rem;
+            animation: slideInLeft 0.8s ease-out both;
+        }
+
+        .value-prop-item:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .value-prop-item:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .value-prop-item:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .value-prop-item:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .value-prop-item:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        .value-prop-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            margin-top: 0.3rem;
+        }
+
+        .value-prop-text h4 {
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .value-prop-text p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ========================================
+           FEATURED MOMENTS SECTION
+           ======================================== */
+        .featured-moments {
+            position: relative;
+        }
+
+        .featured-moments h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .moments-intro {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .moments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .moment-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(255, 0, 110, 0.15));
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .moment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(212, 175, 55, 0.2);
+            opacity: 0;
+            transition: opacity var(--transition-medium);
+        }
+
+        .moment-card:hover::before {
+            opacity: 1;
+        }
+
+        .moment-card:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-gold);
+        }
+
+        .moment-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.8));
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity var(--transition-medium);
+            z-index: 2;
+        }
+
+        .moment-card:hover .moment-label {
+            opacity: 1;
+        }
+
+        .moments-cta {
+            text-align: center;
+        }
+
+        .moments-cta p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ========================================
+           TESTIMONIALS SECTION
+           ======================================== */
+        .testimonials {
+            background: linear-gradient(180deg, rgba(255, 0, 110, 0.05), rgba(212, 175, 55, 0.05));
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 4px;
+            transition: all var(--transition-medium);
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-stars {
+            color: var(--accent-gold);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.2rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            color: var(--accent-gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .testimonial-role {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ========================================
+           BEHIND THE SCENES SECTION
+           ======================================== */
+        .behind-scenes {
+            background: var(--secondary-dark);
+            position: relative;
+        }
+
+        .behind-scenes h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .process-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-gold), var(--accent-red));
+            transform: translateX(-50%);
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .process-step:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .process-content {
+            width: 50%;
+            padding: 1.5rem;
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            position: relative;
+            transition: all var(--transition-medium);
+        }
+
+        .process-content:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .process-step:nth-child(odd) .process-content::after,
+        .process-step:nth-child(even) .process-content::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .process-step:nth-child(odd) .process-content::after {
+            right: -12px;
+            top: 24px;
+            border-width: 8px 0 8px 12px;
+            border-color: transparent transparent transparent var(--border-color);
+        }
+
+        .process-step:nth-child(even) .process-content::before {
+            left: -12px;
+            top: 24px;
+            border-width: 8px 12px 8px 0;
+            border-color: transparent var(--border-color) transparent transparent;
+        }
+
+        .process-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-gold), #f0c950);
+            color: #000;
+            font-weight: 800;
+            font-size: 1.3rem;
+            position: absolute;
+            left: 50%;
+            top: 24px;
+            transform: translateX(-50%);
+            z-index: 2;
+            flex-shrink: 0;
+        }
+
+        .process-content h4 {
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .process-content p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .process-timeline::before {
+                left: 15px;
+            }
+
+            .process-step {
+                flex-direction: column !important;
+            }
+
+            .process-content {
+                width: 100%;
+                margin-left: 40px;
+            }
+
+            .process-step:nth-child(odd) .process-content::after,
+            .process-step:nth-child(even) .process-content::before {
+                display: none;
+            }
+
+            .process-number {
+                left: 0;
+                top: 0;
+            }
+        }
+
+        /* ========================================
+           ARTIST/CLIENT FOCUS SECTION
+           ======================================== */
+        .artist-focus {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(255, 0, 110, 0.1));
+            position: relative;
+        }
+
+        .artist-focus h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .artist-focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .artist-focus-card {
+            background: var(--primary-dark);
+            border: 2px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 4px;
+            text-align: center;
+            transition: all var(--transition-medium);
+            cursor: pointer;
+        }
+
+        .artist-focus-card:hover {
+            border-color: var(--accent-red);
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 0, 110, 0.15);
+        }
+
+        .artist-focus-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .artist-focus-card h3 {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .artist-focus-card p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* ========================================
+           EXPERIENCE TIMELINE SECTION
+           ======================================== */
+        .experience {
+            position: relative;
+        }
+
+        .experience h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent-red), var(--accent-neon), var(--accent-gold));
+            transform: translateX(-50%);
+        }
+
+        .timeline-items {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 50%;
+            padding: 2rem;
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            position: relative;
+            transition: all var(--transition-medium);
+        }
+
+        .timeline-content:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+        }
+
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-dark);
+            border: 3px solid var(--accent-gold);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 15px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+            }
+
+            .timeline-content {
+                width: 100%;
+                margin-left: 40px;
+            }
+
+            .timeline-dot {
+                left: 0;
+            }
+        }
+
+        /* ========================================
+           GEAR/PROFESSIONALISM SECTION
+           ======================================== */
+        .gear-section {
+            background: linear-gradient(180deg, rgba(255, 0, 110, 0.05), rgba(212, 175, 55, 0.05));
+        }
+
+        .gear-section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gear-intro {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .gear-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gear-item {
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            text-align: center;
+            transition: all var(--transition-medium);
+        }
+
+        .gear-item:hover {
+            border-color: var(--accent-neon);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
+        }
+
+        .gear-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .gear-item h4 {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .gear-item p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        /* ========================================
+           FAQ SECTION
+           ======================================== */
+        .faq {
+            background: var(--secondary-dark);
+        }
+
+        .faq h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .faq-items {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 0;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: color var(--transition-fast);
+        }
+
+        .faq-item:hover .faq-question {
+            color: var(--accent-gold);
+        }
+
+        .faq-question h4 {
+            margin: 0;
+            flex: 1;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            transition: transform var(--transition-fast);
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            color: var(--text-muted);
+            margin-top: 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-medium);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        /* ========================================
+           SOCIAL PROOF SECTION
+           ======================================== */
+        .social-proof {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(255, 0, 110, 0.15));
+        }
+
+        .social-proof h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .metric-card {
+            background: var(--primary-dark);
+            border: 2px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 4px;
+            transition: all var(--transition-medium);
+        }
+
+        .metric-card:hover {
+            border-color: var(--accent-gold);
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
+        }
+
+        .metric-number {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========================================
+           COMPARISON SECTION
+           ======================================== */
+        .comparison {
+            background: var(--primary-dark);
+        }
+
+        .comparison h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        table th,
+        table td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table th {
+            background: var(--secondary-dark);
+            color: var(--accent-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        table td {
+            color: var(--text-light);
+        }
+
+        table tr:hover {
+            background: var(--secondary-dark);
+        }
+
+        table .check {
+            color: var(--accent-neon);
+            font-weight: bold;
+        }
+
+        table .cross {
+            color: var(--accent-red);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.85rem;
+            }
+
+            table th,
+            table td {
+                padding: 0.8rem;
+            }
+        }
+
+        /* ========================================
+           CALLOUT BANNERS
+           ======================================== */
+        .callout-banner {
+            background: linear-gradient(135deg, var(--accent-gold), #f0c950);
+            color: #000;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 4px;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .callout-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 0, 110, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .callout-banner h3 {
+            position: relative;
+            z-index: 1;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .callout-banner p {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 1.5rem 0;
+            color: rgba(0, 0, 0, 0.8);
+            font-weight: 500;
+        }
+
+        .callout-banner .btn {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========================================
+           EMAIL CAPTURE SECTION
+           ======================================== */
+        .email-capture {
+            background: var(--secondary-dark);
+            padding: 3rem 2rem;
+            border-radius: 4px;
+            max-width: 600px;
+            margin: 4rem auto;
+            text-align: center;
+        }
+
+        .email-capture h3 {
+            margin-bottom: 1rem;
+        }
+
+        .email-capture p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .email-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            border-radius: 2px;
+            font-size: 0.95rem;
+            transition: border-color var(--transition-fast);
+        }
+
+        .email-form input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .email-form input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .email-form .btn {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .email-form {
+                flex-direction: column;
+            }
+
+            .email-form input,
+            .email-form .btn {
+                width: 100%;
+            }
+        }
+
+        /* ========================================
+           URGENCY SECTION
+           ======================================== */
+        .urgency-section {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.2), rgba(212, 175, 55, 0.2));
+            border: 2px solid var(--accent-red);
+            padding: 2rem;
+            border-radius: 4px;
+            text-align: center;
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .urgency-badge {
+            display: inline-block;
+            background: var(--accent-red);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            border-radius: 2px;
+            margin-bottom: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 0, 110, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(255, 0, 110, 0);
+            }
+        }
+
+        .urgency-section h3 {
+            color: var(--accent-red);
+            margin: 1rem 0;
+        }
+
+        .urgency-section p {
+            color: var(--text-light);
+        }
+
+        /* ========================================
+           FINAL CTA SECTION (HERO-LIKE)
+           ======================================== */
+        .final-cta {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(26, 26, 26, 0.8)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="dots" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="%23333"/></pattern></defs><rect width="1200" height="800" fill="%230a0a0a"/><rect width="1200" height="800" fill="url(%23dots)"/></svg>');
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .final-cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .final-cta-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .final-cta h2 {
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-cta-subtext {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .final-cta .btn-primary {
+            padding: 20px 50px;
+            font-size: 1.1rem;
+            position: relative;
+            animation: pulse-scale 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-scale {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        footer {
+            background: var(--primary-dark);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0 1rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            transition: all var(--transition-fast);
+        }
+
+        .social-links a:hover {
+            border-color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* ========================================
+           RESPONSIVE ADJUSTMENTS
+           ======================================== */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero-cta-group {
+                flex-direction: column;
+            }
+
+            .hero-cta-group .btn {
+                width: 100%;
+            }
+
+            .style-grid,
+            .services-grid,
+            .moments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 0.8rem 1.5rem;
+            }
+
+            .nav-links {
+                gap: 0.8rem;
+                font-size: 0.7rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         NAVIGATION
+         ======================================== -->
+    <nav>
+        <div class="container">
+            <div class="nav-logo">[YOUR BRAND NAME]</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="[YOUR INSTAGRAM LINK]" class="nav-cta" target="_blank">Follow on Instagram</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ========================================
+         FLOATING CTA BUTTON
+         ======================================== -->
+    <a href="[YOUR INSTAGRAM LINK]" target="_blank" class="floating-cta" title="View on Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.117.6c-.779.267-1.459.645-2.228 1.405-.764.772-1.143 1.452-1.408 2.227-.266.782-.47 1.645-.527 3.073C.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.427.264 2.289.527 3.072.271.782.645 1.469 1.408 2.228.768.763 1.45 1.143 2.228 1.408.ondarray.782 4.905 1.143 6.183 1.2 1.28.057 1.687.072 4.947.072s3.667-.015 4.947-.072c1.428-.059 2.289-.264 3.073-.527.782-.271 1.469-.645 2.228-1.408.764-.768 1.143-1.45 1.408-2.228.266-.782.47-1.645.527-3.073.057-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.427-.264-2.289-.527-3.072-.271-.782-.645-1.469-1.408-2.228-.768-.763-1.45-1.143-2.228-1.408-.782-.271-1.645-.47-3.073-.527C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.009 4.849.070 1.171.054 1.805.244 2.227.414.562.217.96.477 1.382.896.419.42.679.819.896 1.381.17.422.36 1.057.413 2.227.061 1.264.07 1.646.07 4.849s-.009 3.585-.07 4.849c-.054 1.171-.244 1.805-.414 2.227-.217.562-.477.96-.896 1.382-.42.419-.819.679-1.381.896-.422.17-1.057.36-2.227.413-1.264.061-1.646.07-4.849.07s-3.585-.009-4.849-.07c-1.171-.054-1.805-.244-2.227-.414-.562-.217-.96-.477-1.382-.896-.419-.42-.679-.819-.896-1.381-.17-.422-.36-1.057-.413-2.227-.061-1.264-.07-1.646-.07-4.849s.009-3.585.07-4.849c.054-1.171.244-1.805.414-2.227.217-.562.477-.96.896-1.382.42-.419.819-.679 1.381-.896.422-.17 1.057-.36 2.227-.413 1.264-.061 1.646-.07 4.849-.07Z"/>
+        </svg>
+    </a>
+
+    <!-- ========================================
+         HERO SECTION
+         ======================================== -->
+    <section class="hero">
+        <div class="hero-bg-image"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-label">Premium Concert Photography</div>
+                <h1>Capture the Energy<br>Live on Stage</h1>
+                <p class="hero-subheading">
+                    Raw moments, refined artistry. Every shot tells the story of an artist in their element. 
+                    From festival stages to intimate venues — I freeze the magic.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="[YOUR INSTAGRAM LINK]" target="_blank" class="btn btn-primary">View Portfolio on Instagram</a>
+                    <a href="#about" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 5v14M19 18l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ========================================
+         CREDIBILITY STRIP
+         ======================================== -->
+    <div class="credibility-strip">
+        <div class="container">
+            <div class="credibility-grid">
+                <div class="credibility-item">
+                    <h4>500+</h4>
+                    <p>Events Captured</p>
+                </div>
+                <div class="credibility-item">
+                    <h4>100+</h4>
+                    <p>Artists Photographed</p>
+                </div>
+                <div class="credibility-item">
+                    <h4>2M+</h4>
+                    <p>Instagram Impressions</p>
+                </div>
+                <div class="credibility-item">
+                    <h4>50k+</h4>
+                    <p>Engaged Followers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         ABOUT SECTION
+         ======================================== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content fade-in">
+                <div class="about-image"></div>
+                <div class="about-text">
+                    <h2>The Story Behind the Lens</h2>
+                    <p>
+                        I started photographing live concerts over 10 years ago, armed with a borrowed camera 
+                        and an obsession with capturing raw human emotion. What began in sweaty underground venues 
+                        has evolved into capturing some of the industry's biggest moments.
+                    </p>
+                    <h3>Mission</h3>
+                    <p>
+                        To create images that don't just document a performance—they resurrect the feeling. 
+                        Every frame is a time machine back to that electric moment on stage.
+                    </p>
+                    <div class="mission-statement">
+                        "Your music deserves photography that matches its energy. That's what I deliver."
+                    </div>
+                    <p>
+                        With technical mastery and an artist's eye, I cut through the noise of thousands of frames 
+                        to find THE shot—the one that captures who you are when the spotlight hits.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SIGNATURE STYLE SECTION
+         ======================================== -->
+    <section class="signature-style">
+        <div class="container">
+            <h2>My Signature Style</h2>
+            <div class="style-grid">
+                <div class="style-card fade-in">
+                    <div class="style-icon">🎭</div>
+                    <h3>Authentic Moments</h3>
+                    <p>No posed, staged shots. I hunt for the unguarded moment—the peak energy, the raw emotion that defines a live performance.</p>
+                </div>
+                <div class="style-card fade-in">
+                    <div class="style-icon">✨</div>
+                    <h3>Cinematic Color</h3>
+                    <p>Vibrant, moody, and film-inspired. My post-processing emphasizes atmosphere and drama without feeling over-edited.</p>
+                </div>
+                <div class="style-card fade-in">
+                    <div class="style-icon">⚡</div>
+                    <h3>Technical Excellence</h3>
+                    <p>Fast glass, high ISO mastery, precise focus tracking. I nail the shot even in the harshest lighting conditions.</p>
+                </div>
+                <div class="style-card fade-in">
+                    <div class="style-icon">🎨</div>
+                    <h3>Storytelling Edge</h3>
+                    <p>Every image works as a standalone piece and as part of a larger narrative. Sequences that build momentum and emotion.</p>
+                </div>
+                <div class="style-card fade-in">
+                    <div class="style-icon">🔥</div>
+                    <h3>Industry Aesthetic</h3>
+                    <p>Influenced by the best music photographers in the world. A style that feels at home on album covers and festival lineups.</p>
+                </div>
+                <div class="style-card fade-in">
+                    <div class="style-icon">🎯</div>
+                    <h3>Artist-Centric Delivery</h3>
+                    <p>I deliver images that serve YOU. Optimized for Instagram, press kits, social content, and gallery-worthy prints.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         CALLOUT BANNER #1
+         ======================================== -->
+    <div class="container">
+        <div class="callout-banner">
+            <h3>Your Next Show Deserves Premium Coverage</h3>
+            <p>See real examples from artists and festivals using my work.</p>
+            <a href="[YOUR INSTAGRAM LINK]" target="_blank" class="btn btn-outline">Browse Recent Work</a>
+        </div>
+    </div>
+
+    <!-- ========================================
+         SERVICES SECTION
+         ======================================== -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Services</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-number">01</div>
+                    <h3>Live Concert Photography</h3>
+                    <p>
+                        Full coverage of your performance. Multi-camera setup, strategic positioning, 
+                        and instant turnaround for social media and press.
+                    </p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-number">02</div>
+                    <h3>Festival Coverage</h3>
+                    <p>
+                        Multi-act assignments. I cover your band plus capture the overall energy and 
+                        atmosphere that makes festivals electric.
+                    </p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-number">03</div>
+                    <h3>Artist Press Kits</h3>
+                    <p>
+                        Curated image collections optimized for media, booking agencies, and promotional use. 
+                        Ready-to-license, professionally organized.
+                    </p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-number">04</div>
+                    <h3>Venue & Promotion</h3>
+                    <p>
+                        Regular coverage for venues and promoters. Ongoing relationship pricing. 
+                        Rapid delivery for real-time social posting.
+                    </p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-number">05</div>
+                    <h3>Album & Merch Content</h3>
+                    <p>
+                        High-resolution gallery-quality images for album artwork, merchandise, 
+                        and print campaigns.
+                    </p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-number">06</div>
+                    <h3>Custom Projects</h3>
+                    <p>
+                        Brand partnerships, documentary-style shoots, and special commissions. 
+                        Let's discuss your vision.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         VALUE PROPOSITIONS SECTION
+         ======================================== -->
+    <section class="value-props">
+        <div class="container">
+            <h2>Why Choose Me</h2>
+            <div class="value-props-list">
+                <div class="value-prop-item">
+                    <div class="value-prop-icon">⚡</div>
+                    <div class="value-prop-text">
+                        <h4>Live Editing</h4>
+                        <p>First-day delivery available. Your best shots in your hands before the night ends.</p>
+                    </div>
+                </div>
+                <div class="value-prop-item">
+                    <div class="value-prop-icon">🎬</div>
+                    <div class="value-prop-text">
+                        <h4>Industry Experience</h4>
+                        <p>I've shot for festivals, labels, and major artists. I know what works in this industry.</p>
+                    </div>
+                </div>
+                <div class="value-prop-item">
+                    <div class="value-prop-icon">🔐</div>
+                    <div class="value-prop-text">
+                        <h4>Reliable & Professional</h4>
+                        <p>Backup gear, insurance, contracts—I'm prepared for anything. You can focus on performing.</p>
+                    </div>
+                </div>
+                <div class="value-prop-item">
+                    <div class="value-prop-icon">📸</div>
+                    <div class="value-prop-text">
+                        <h4>Obsessive Quality</h4>
+                        <p>Every image is hand-edited. No batch processing. Your moment deserves that level of care.</p>
+                    </div>
+                </div>
+                <div class="value-prop-item">
+                    <div class="value-prop-icon">🤝</div>
+                    <div class="value-prop-text">
+                        <h4>True Partnership</h4>
+                        <p>I'm invested in your success. Your wins are my portfolio. We're on the same team.</p>
+                    </div>
+                </div>
+                <div class="value-prop-item">
+                    <div class="value-prop-icon">🌟</div>
+                    <div class="value-prop-text">
+                        <h4>Instagram-Optimized</h4>
+                        <p>Images shot and edited for social impact. Captions, hashtags, and posting strategy included.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FEATURED MOMENTS SECTION
+         ======================================== -->
+    <section class="featured-moments" id="work">
+        <div class="container">
+            <h2>Featured Moments</h2>
+            <p class="moments-intro">
+                A taste of recent work. Full portfolio and ongoing content on Instagram—where 
+                you'll see the complete story from every shoot.
+            </p>
+            <div class="moments-grid">
+                <div class="moment-card fade-in">
+                    <div class="moment-label">Festival Main Stage</div>
+                    📸
+                </div>
+                <div class="moment-card fade-in">
+                    <div class="moment-label">Intimate Venue</div>
+                    📸
+                </div>
+                <div class="moment-card fade-in">
+                    <div class="moment-label">Crowd Energy</div>
+                    📸
+                </div>
+                <div class="moment-card fade-in">
+                    <div class="moment-label">Artist Close-up</div>
+                    📸
+                </div>
+                <div class="moment-card fade-in">
+                    <div class="moment-label">Stage Production</div>
+                    📸
+                </div>
+                <div class="moment-card fade-in">
+                    <div class="moment-label">Atmospheric Shot</div>
+                    📸
+                </div>
+                <div class="moment-card fade-in">
+                    <div class="moment-label">Collaboration Moment</div>
+                    📸
+                </div>
+                <div class="moment-card fade-in">
+                    <div class="moment-label">Emotional Peak</div>
+                    📸
+                </div>
+                <div class="moment-card fade-in">
+                    <div class="moment-label">Technical Showcase</div>
+                    📸
+                </div>
+            </div>
+            <div class="moments-cta fade-in">
+                <p>This is just the beginning. Explore hundreds more shots and behind-the-scenes content on Instagram.</p>
+                <a href="[YOUR INSTAGRAM LINK]" target="_blank" class="btn btn-primary">See Full Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         TESTIMONIALS SECTION
+         ======================================== -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Testimonials</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "[PHOTOGRAPHER NAME] captured our entire set in a way that made us look GOOD. 
+                        We used these images everywhere—press kit, social, merch. Absolute professional."
+                    </p>
+                    <div class="testimonial-author">[ARTIST NAME]</div>
+                    <div class="testimonial-role">Recording Artist</div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Working with them was seamless. Fast turnaround, incredible quality, 
+                        and they understood exactly what we needed for our festival promotion. Highly recommend."
+                    </p>
+                    <div class="testimonial-author">[FESTIVAL NAME]</div>
+                    <div class="testimonial-role">Festival Organizer</div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Not just a photographer—a collaborator. They understood our brand and 
+                        delivered images that elevated our entire marketing campaign. Worth every penny."
+                    </p>
+                    <div class="testimonial-author">[LABEL / VENUE NAME]</div>
+                    <div class="testimonial-role">Booking Agent</div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "The attention to detail is insane. Every shot is perfectly edited, 
+                        properly tagged, and ready for immediate use. This is what professionalism looks like."
+                    </p>
+                    <div class="testimonial-author">[ARTIST NAME]</div>
+                    <div class="testimonial-role">Independent Artist</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         BEHIND THE SCENES SECTION
+         ======================================== -->
+    <section class="behind-scenes">
+        <div class="container">
+            <h2>The Process</h2>
+            <div class="process-timeline">
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="process-number">1</div>
+                        <div class="process-content">
+                            <h4>Consultation & Planning</h4>
+                            <p>
+                                We align on your vision, venue layout, setlist timing, and deliverables. 
+                                I scout locations and plan camera positions for maximum impact.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-number">2</div>
+                        <div class="process-content">
+                            <h4>Live Coverage</h4>
+                            <p>
+                                I'm positioned with redundant gear, capturing multiple angles throughout your performance. 
+                                I move dynamically to frame your energy.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-number">3</div>
+                        <div class="process-content">
+                            <h4>Curation & Editing</h4>
+                            <p>
+                                I hand-select the strongest images and edit each individually—color grading, 
+                                retouching, and optimization for your final use.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-number">4</div>
+                        <div class="process-content">
+                            <h4>Delivery & Support</h4>
+                            <p>
+                                High-res files, social-optimized versions, organized folders, and metadata. 
+                                Ongoing support for any questions or custom edits.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         ARTIST/CLIENT FOCUS SECTION
+         ======================================== -->
+    <section class="artist-focus">
+        <div class="container">
+            <h2>I Work With</h2>
+            <div class="artist-focus-grid">
+                <div class="artist-focus-card fade-in">
+                    <div class="artist-focus-icon">🎤</div>
+                    <h3>Recording Artists</h3>
+                    <p>
+                        From emerging acts to established names. I create content that supports 
+                        your brand and amplifies your reach.
+                    </p>
+                </div>
+                <div class="artist-focus-card fade-in">
+                    <div class="artist-focus-icon">🎪</div>
+                    <h3>Music Festivals</h3>
+                    <p>
+                        Multi-day coverage. I deliver a mix of act portraits, crowd shots, and 
+                        production imagery for promotional content.
+                    </p>
+                </div>
+                <div class="artist-focus-card fade-in">
+                    <div class="artist-focus-icon">🏛️</div>
+                    <h3>Venues & Promoters</h3>
+                    <p>
+                        Ongoing partnerships. Consistent, high-quality coverage of your events 
+                        for social media and marketing.
+                    </p>
+                </div>
+                <div class="artist-focus-card fade-in">
+                    <div class="artist-focus-icon">🎵</div>
+                    <h3>Record Labels</h3>
+                    <p>
+                        Press kit photography, album artwork support, and artist development content. 
+                        We build your visual story together.
+                    </p>
+                </div>
+                <div class="artist-focus-card fade-in">
+                    <div class="artist-focus-icon">🤝</div>
+                    <h3>Managers & Agents</h3>
+                    <p>
+                        I'm a resource for your team. Quick turnarounds, reliable delivery, 
+                        and images that elevate your client's presence.
+                    </p>
+                </div>
+                <div class="artist-focus-card fade-in">
+                    <div class="artist-focus-icon">📸</div>
+                    <h3>Bands & Collectives</h3>
+                    <p>
+                        Whether you're a duo or a full ensemble, I capture the chemistry 
+                        and energy that defines your sound.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         CALLOUT BANNER #2
+         ======================================== -->
+    <div class="container">
+        <div class="callout-banner">
+            <h3>Rates & Packages</h3>
+            <p>Custom pricing based on event type, duration, and deliverables. Let's talk specifics.</p>
+            <a href="[YOUR INSTAGRAM LINK]" target="_blank" class="btn btn-outline">DM for Details</a>
+        </div>
+    </div>
+
+    <!-- ========================================
+         EXPERIENCE / TIMELINE SECTION
+         ======================================== -->
+    <section class="experience">
+        <div class="container">
+            <h2>Career Highlights</h2>
+            <div class="timeline">
+                <div class="timeline-items">
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2024</div>
+                            <div class="timeline-title">Festival Season Success</div>
+                            <div class="timeline-description">
+                                Covered 15+ major festivals. Official photographer for [FESTIVAL NAME]. 
+                                Images featured in international press.
+                            </div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2023</div>
+                            <div class="timeline-title">50k Instagram Milestone</div>
+                            <div class="timeline-description">
+                                Organic growth to 50k followers. High engagement rates on all concert content. 
+                                Featured in [INDUSTRY PUBLICATION].
+                            </div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2022</div>
+                            <div class="timeline-title">Label Collaboration</div>
+                            <div class="timeline-description">
+                                Partnered with [LABEL NAME] for artist press kit photography. 
+                                Images used across multiple album campaigns.
+                            </div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2021</div>
+                            <div class="timeline-title">First Major Tour</div>
+                            <div class="timeline-description">
+                                Selected as official tour photographer for [ARTIST NAME]. 
+                                Multi-city coverage, album artwork contribution.
+                            </div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2015</div>
+                            <div class="timeline-title">Professional Transition</div>
+                            <div class="timeline-description">
+                                Left corporate work to pursue music photography full-time. 
+                                First major festival assignment.
+                            </div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         GEAR & PROFESSIONALISM SECTION
+         ======================================== -->
+    <section class="gear-section">
+        <div class="container">
+            <h2>Technical Arsenal</h2>
+            <p class="gear-intro">
+                Equipped with industry-standard gear and backup systems. I'm prepared for any lighting condition, 
+                venue, or challenge. Reliability is non-negotiable.
+            </p>
+            <div class="gear-grid">
+                <div class="gear-item fade-in">
+                    <div class="gear-icon">📷</div>
+                    <h4>Pro DSLR / Mirrorless</h4>
+                    <p>Dual 24mp+ bodies with fast frame rates</p>
+                </div>
+                <div class="gear-item fade-in">
+                    <div class="gear-icon">🔭</div>
+                    <h4>Premium Glass</h4>
+                    <p>24-70mm, 70-200mm, 14mm ultra-wide</p>
+                </div>
+                <div class="gear-item fade-in">
+                    <div class="gear-icon">💡</div>
+                    <h4>Lighting Knowledge</h4>
+                    <p>Master of high-ISO, fast glass, white balance</p>
+                </div>
+                <div class="gear-item fade-in">
+                    <div class="gear-icon">⚙️</div>
+                    <h4>Backup Systems</h4>
+                    <p>Redundant bodies, lenses, batteries, cards</p>
+                </div>
+                <div class="gear-item fade-in">
+                    <div class="gear-icon">🔋</div>
+                    <h4>Endless Power</h4>
+                    <p>Extended battery supplies, charged and ready</p>
+                </div>
+                <div class="gear-item fade-in">
+                    <div class="gear-icon">💻</div>
+                    <h4>Pro Workflow</h4>
+                    <p>Adobe Suite, Lightning Fast, Professional Standards</p>
+                </div>
+                <div class="gear-item fade-in">
+                    <div class="gear-icon">📡</div>
+                    <h4>Connectivity</h4>
+                    <p>Mobile backup upload, cloud synchronization</p>
+                </div>
+                <div class="gear-item fade-in">
+                    <div class="gear-icon">✅</div>
+                    <h4>Licensed & Insured</h4>
+                    <p>Professional coverage, peace of mind</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FAQ SECTION
+         ======================================== -->
+    <section class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-items">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How long does it take to receive my photos?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            I offer same-day or next-day delivery for social media previews. 
+                            Fully edited, organized galleries arrive within 3-5 business days. 
+                            Rush delivery available upon request.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What's included in your packages?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            Full event coverage, professional editing, high-res files, 
+                            social-optimized versions, organized galleries, and basic retouching. 
+                            Custom packages available for special needs.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Can you provide images for commercial use / press?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            Yes. All deliverables include full commercial and press use rights. 
+                            You own the images for all promotional and editorial applications.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Do you travel for events?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            Absolutely. Travel is arranged based on event location. 
+                            Travel costs are quoted separately or bundled into package rates 
+                            depending on distance and scope.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What if the lighting is terrible?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            I specialize in challenging lighting. Fast glass (f/2.8 or wider), 
+                            high-ISO mastery, and careful white balance correction are core to my skill set. 
+                            You'll still get stunning results.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How do I book you?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            DM me on Instagram with your event details, date, and any specific requests. 
+                            We'll discuss your needs, confirm availability, and finalize a custom quote.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Do you offer retouching or custom edits after delivery?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            Yes. Minor revisions are included. More extensive edits are available à la carte. 
+                            I want you to love every image—let's make it happen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SOCIAL PROOF / METRICS SECTION
+         ======================================== -->
+    <section class="social-proof">
+        <div class="container">
+            <h2>Social Proof & Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card fade-in">
+                    <div class="metric-number">50k+</div>
+                    <div class="metric-label">Instagram Followers</div>
+                </div>
+                <div class="metric-card fade-in">
+                    <div class="metric-number">2M+</div>
+                    <div class="metric-label">Total Impressions</div>
+                </div>
+                <div class="metric-card fade-in">
+                    <div class="metric-number">95%</div>
+                    <div class="metric-label">Client Satisfaction</div>
+                </div>
+                <div class="metric-card fade-in">
+                    <div class="metric-number">500+</div>
+                    <div class="metric-label">Events Captured</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         COMPARISON SECTION
+         ======================================== -->
+    <section class="comparison">
+        <div class="container">
+            <h2>Why I Stand Out</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>[YOUR BRAND NAME]</th>
+                            <th>Generic Photographer</th>
+                            <th>Amateur DIY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Live Coverage Expertise</strong></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Professional Editing</strong></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Industry Aesthetic</strong></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Same-Day Delivery</strong></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Backup Gear</strong></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Licensed & Insured</strong></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Proven Track Record</strong></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Instagram Integration</strong></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         EMAIL CAPTURE SECTION
+         ======================================== -->
+    <div class="container">
+        <div class="email-capture fade-in">
+            <h3>Stay Updated</h3>
+            <p>Get behind-the-scenes content and updates on new work.</p>
+            <form class="email-form" onsubmit="return false;">
+                <input type="email" placeholder="your@email.com" required>
+                <button type="submit" class="btn btn-secondary">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========================================
+         URGENCY / SCARCITY SECTION
+         ======================================== -->
+    <div class="container">
+        <div class="urgency-section">
+            <div class="urgency-badge">⚡ LIMITED AVAILABILITY</div>
+            <h3>I Take Only a Few Events Per Month</h3>
+            <p>
+                To maintain quality and ensure every project gets my full attention, 
+                I limit bookings. Peak season slots fill fast. Inquire soon to secure your date.
+            </p>
+        </div>
+    </div>
+
+    <!-- ========================================
+         CALLOUT BANNER #3
+         ======================================== -->
+    <div class="container">
+        <div class="callout-banner">
+            <h3>Ready to Capture Your Next Moment?</h3>
+            <p>Let's create images that tell your story.</p>
+            <a href="[YOUR INSTAGRAM LINK]" target="_blank" class="btn btn-outline">Check My Work First</a>
+        </div>
+    </div>
+
+    <!-- ========================================
+         FINAL CTA SECTION
+         ======================================== -->
+    <section class="final-cta" id="contact">
+        <div class="final-cta-content">
+            <div class="final-cta-label">Your Next Event Starts Here</div>
+            <h2>See the Complete Portfolio</h2>
+            <p class="final-cta-subtext">
+                Hundreds of concert moments. Behind-the-scenes content. Real results from real artists. 
+                Everything is on Instagram.
+            </p>
+            <a href="[YOUR INSTAGRAM LINK]" target="_blank" class="btn btn-primary">
+                View Full Portfolio on Instagram
+            </a>
+            <p style="margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+                Or DM me directly for bookings and inquiries.
+            </p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>[YOUR BRAND NAME]</h4>
+                    <p>
+                        Premium concert and live event photography. 
+                        Based in [YOUR CITY]. Available for travel.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#work">Featured Work</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="[YOUR INSTAGRAM LINK]" target="_blank" title="Instagram">📷</a>
+                        <a href="[YOUR EMAIL LINK]" title="Email">✉️</a>
+                        <a href="[YOUR PORTFOLIO SITE]" target="_blank" title="Portfolio">🌐</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2024 [YOUR BRAND NAME]. All images © [YOUR BRAND NAME]. All rights reserved.
+                </p>
+                <ul class="footer-links" style="display: flex; gap: 1rem; margin: 0;">
+                    <li><a href="#" onclick="alert('Placeholder'); return false;">Privacy</a></li>
+                    <li><a href="#" onclick="alert('Placeholder'); return false;">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================
+         JAVASCRIPT - SCROLL ANIMATIONS & INTERACTIVITY
+         ======================================== -->
+    <script>
+        // ========================================
+        // Scroll-triggered animations
+        // ========================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ========================================
+        // FAQ toggle functionality
+        // ========================================
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', function() {
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // ========================================
+        // Smooth scroll navigation
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ========================================
+        // Email form handling (placeholder)
+        // ========================================
+        const emailForm = document.querySelector('.email-form');
+        if (emailForm) {
+            emailForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const input = this.querySelector('input[type="email"]');
+                if (input.value) {
+                    alert('Thank you! Check your email for updates.');
+                    input.value = '';
+                }
+            });
+        }
+
+        // ========================================
+        // Parallax effect on hero
+        // ========================================
+        window.addEventListener('scroll', function() {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                const scrollPosition = window.scrollY;
+                hero.style.backgroundPosition = `center ${scrollPosition * 0.5}px`;
+            }
+        });
+
+        // ========================================
+        // Sticky navigation highlight on scroll
+        // ========================================
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href') === '#' + current) {
+                    link.style.color = 'var(--accent-gold)';
+                }
+            });
+        });
+
+        // ========================================
+        // Analytics event tracking (placeholder)
+        // ========================================
+        document.querySelectorAll('.btn-primary, .nav-cta').forEach(btn => {
+            btn.addEventListener('click', function() {
+                console.log('CTA Clicked:', this.textContent);
+                // Replace with your analytics code (Google Analytics, Mixpanel, etc.)
+            });
+        });
+    </script>
+
+</body>
+</html>
